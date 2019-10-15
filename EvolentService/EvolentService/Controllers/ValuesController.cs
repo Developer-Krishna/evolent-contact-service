@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EvolentService.Core.Repository;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EvolentService.Controllers
@@ -10,12 +11,22 @@ namespace EvolentService.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+
+        private IRepositoryWrapper _repoWrapper;
+        public ValuesController(IRepositoryWrapper repoWrapper)
+        {
+            _repoWrapper = repoWrapper;
+        }
+
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
+            var response = _repoWrapper.Contact.FindAll();
             return new string[] { "value1", "value2" };
         }
+
+       
 
         // GET api/values/5
         [HttpGet("{id}")]

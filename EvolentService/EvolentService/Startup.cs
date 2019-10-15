@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EvolentService.Core.Models;
+using EvolentService.Extentions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -25,8 +27,9 @@ namespace EvolentService
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            //Test changes
-            //Polling check
+            services.ConfigureMySqlContext(Configuration);
+            services.ConfigureRepositoryWrapper();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
